@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial</title>
-    <link rel="stylesheet" href="style/index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tarefas</title>
+  <link rel="stylesheet" href="style/index.css">
 </head>
 <body>
-
-    <div class="container">
-        <h1>Escolha uma opção:</h1>
-        <a href="1-html-basico.html">HTML Básico</a>
-        <a href="2-css-basico-flex.html">HTML com Display Flex</a>
-        <a href="3-css-basico-grid.html">HTML com Display Grid</a>
-    </div>
-
+  <div class="container">
+    <h1>Lista de Tarefas</h1>
+    <input type="text" id="todo-input" placeholder="Adicione uma nova tarefa">
+    <button id="add-button">Adicionar</button>
+    <ul id="todo-list"></ul>
+  </div>
+  <script src="js/index.js"></script>
 </body>
 </html>

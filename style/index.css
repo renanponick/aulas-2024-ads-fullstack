@@ -4,29 +4,65 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: #f4f4f4;
     margin: 0;
 }
 
 .container {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 600px;
     text-align: center;
 }
 
-.container h1 {
+h1 {
     margin-bottom: 20px;
 }
 
-.container a {
-    display: block;
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
+input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
 }
 
-.container a:hover {
-    background-color: #0056b3;
+button {
+    padding: 10px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+button.delete {
+    background-color: #dc3545;
+}
+
+button.delete:hover {
+    background-color: #c82333;
 }

@@ -1,0 +1,32 @@
+main {
+  flex: 1;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+section {
+  background-color: #f9f9f9;
+  padding: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.container > div {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column;
+  }
+}

@@ -9,7 +9,7 @@ body {
 }
 
 header {
-    background-color: #4CAF50;
+    background-color: #303030;
     color: white;
     padding: 1em;
     text-align: center;
@@ -42,15 +42,71 @@ section {
 }
 
 footer {
-    background-color: #4CAF50;
+    background-color: #303030;
     color: white;
     text-align: center;
     padding: 1em;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
+/* Estilo dos formulários */
+form div {
+    margin-bottom: 16px; /* 1rem = 16px */
+}
+
+label {
+    display: block;
+    margin-bottom: 8px; /* 0.5rem = 8px */
+}
+
+input, textarea, select {
+    width: 99%;
+    padding: 8px; /* 0.5rem = 8px */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#cor {
+    width: 50px;
+    height: 50px;
+}
+
+.movie {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+    flex-wrap: wrap; /* Quebrará a linha quando chegar no limite do width*/
+}
+
+h2 {
+    width: 100%;
+    border-bottom: 2px solid #303030;
+    padding-bottom: 8px; /* 0.5rem = 8px */
+    margin-bottom: 16px; /* 1rem = 16px */
+}
+
+.movie-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+    padding: 10px 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+}
+/* Efeito de hover no card */
+.movie-card:hover {
+    transform: scale(1.05); /* Aumenta o card em 5% */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta a sombra para destacar o card */
+}
+
+.movie-card img {
+    max-width: 100%;
+    border-radius: 4px;
+}
+
+.movie-card h4 {
+    font-size: 18px;
+    margin: 5px;
+    color: #333;
 }

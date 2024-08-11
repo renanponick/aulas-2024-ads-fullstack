@@ -122,3 +122,40 @@ footer {
     width: 100%;
     bottom: 0;
 }
+
+
+.menu {
+    background-color: #af6b4c;
+    padding: 10px;
+}
+
+.menu h3 {
+    color: white;
+    text-align: center;
+}
+
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu li {
+    width: 33%;
+    text-align: center;
+    background-color: #995e43;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    display: block;
+    transition: background-color 1s ease;
+}
+
+.menu li a:hover {
+    background-color: #553323;
+}

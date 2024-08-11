@@ -3,51 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Exemplo</title>
     <link rel="stylesheet" href="style/1-css-basico.css">
-    <title>Básica</title>
 </head>
 <body>
-
+    
     <!-- Cabeçalho -->
     <header>
         <h1>Minha Página HTML Básica</h1>
-        <a href="index.html"><button>Voltar</button></a>
     </header>
 
     <!-- Corpo da página -->
-    <div style="padding: 20px;">
+    <main>
         <section>
             <h2>Seção de Listas</h2>
-            
-            <!-- Lista não ordenada -->
-            <h3>Lista não ordenada:</h3>
-            <ul>
-                <li>Item 1</li>
-                <li>Item 2</li>
-                <li>Item 3</li>
-            </ul>
-            
-            <!-- Lista ordenada -->
-            <h3>Lista ordenada:</h3>
-            <ol>
-                <li>Primeiro item</li>
-                <li>Segundo item</li>
-                <li>Terceiro item</li>
-            </ol>
+            <div class="container">
+                <!-- Lista não ordenada -->
+                <div class="menu">
+                    <h3>Lista não ordenada:</h3>
+                    <ul>
+                        <li><a href="#">Item 1</a></li>
+                        <li><a href="#">Item 2</a></li>
+                        <li><a href="#">Item 3</a></li>
+                    </ul>
+                </div>
+                <!-- Lista ordenada -->
+                <div>
+                    <h3>Lista ordenada:</h3>
+                    <ol>
+                        <li>Primeiro item</li>
+                        <li>Segundo item</li>
+                        <li>Terceiro item</li>
+                    </ol>
+                </div>
+            </div>
         </section>
         
         <section>
             <h2>Incorporando Imagem e Vídeo</h2>
-            
-            <!-- Imagem -->
-            <figure>
-                <img src="https://via.placeholder.com/600x400" alt="Exemplo de imagem">
-                <figcaption>Legenda da imagem</figcaption>
-            </figure>
-            
-            <!-- Vídeo -->
-            <h3>Vídeo incorporado:</h3>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+            <div class="container">
+                <!-- Imagem -->
+                <div>
+                    <figure>
+                        <img src="https://via.placeholder.com/600x400" alt="Exemplo de imagem">
+                        <figcaption>Legenda da imagem</figcaption>
+                    </figure>
+                </div>
+                <!-- Vídeo -->
+                <div>
+                    <h3>Vídeo incorporado:</h3>
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
         </section>
         
         <section class="last">
@@ -80,12 +87,11 @@
                 <button type="submit">Enviar</button>
             </form>
         </section>
-    </div>
+    </main>
 
     <!-- Rodapé -->
     <footer>
         <p>&copy; 2024 - Minha Página HTML</p>
     </footer>
-
 </body>
 </html>

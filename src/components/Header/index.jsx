@@ -11,7 +11,7 @@ export default function Header(){
                 <img src={reactLogo} alt='Logo do React' />
                 <img src={viteLogo} alt='Logo do Vite' />
             </header>
-            <nav>
+            <nav className="menu">
                 <ul>
                     <Link to="/">
                         <li>Home</li>

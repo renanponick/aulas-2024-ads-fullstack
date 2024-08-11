@@ -12,7 +12,7 @@ export default function Filter({ busca, setBusca }){
           filtros.set(type, value)
         }
     
-        setBusca('?'+filtros.toString())
+        setBusca("&"+filtros.toString())
       }
     
     function marcarFiltro(type, value){
@@ -26,46 +26,48 @@ export default function Filter({ busca, setBusca }){
     }
 
     return (
-        <div className='filtros'>
+        <div>
             <span className='filtros-titulo'>Filtros</span>
-            <div className='filtro status'>
-                <b>Status:</b>
-                <span
-                    className={marcarFiltro('status', 'live')}
-                    onClick={() => montarFiltro('status', 'live')}
-                >
-                    Vivo
-                </span>
-                <span
-                    className={marcarFiltro('status', 'dead')}
-                    onClick={() => montarFiltro('status', 'dead')}>
-                    Morto
-                </span>
-                <span
-                    className={marcarFiltro('status', 'unknown')}
-                    onClick={() => montarFiltro('status', 'unknown')}
-                >
-                    Desconhecido
-                </span>
-            </div>
-            <div className='filtro genero'>
-                <b>Gênero:</b> 
-                <span
-                    className={marcarFiltro('gender', 'female')}
-                    onClick={() => montarFiltro('gender', 'female')}>Feminino
-                </span>
-                <span
-                    className={marcarFiltro('gender', 'male')}
-                    onClick={() => montarFiltro('gender', 'male')}>Masculino
-                </span>
-                <span
-                    className={marcarFiltro('gender', 'genderless')}
-                    onClick={() => montarFiltro('gender', 'genderless')}>Sem gênero
-                </span>
-                <span
-                    className={marcarFiltro('gender', 'unknown')}
-                    onClick={() => montarFiltro('gender', 'unknown')}>Desconhecido
-                </span>
+            <div className='filtros'>
+                <div className='filtro status'>
+                    <b>Status:</b>
+                    <span
+                        className={marcarFiltro('status', 'live')}
+                        onClick={() => montarFiltro('status', 'live')}
+                    >
+                        Vivo
+                    </span>
+                    <span
+                        className={marcarFiltro('status', 'dead')}
+                        onClick={() => montarFiltro('status', 'dead')}>
+                        Morto
+                    </span>
+                    <span
+                        className={marcarFiltro('status', 'unknown')}
+                        onClick={() => montarFiltro('status', 'unknown')}
+                    >
+                        Desconhecido
+                    </span>
+                </div>
+                <div className='filtro genero'>
+                    <b>Gênero:</b> 
+                    <span
+                        className={marcarFiltro('gender', 'female')}
+                        onClick={() => montarFiltro('gender', 'female')}>Feminino
+                    </span>
+                    <span
+                        className={marcarFiltro('gender', 'male')}
+                        onClick={() => montarFiltro('gender', 'male')}>Masculino
+                    </span>
+                    <span
+                        className={marcarFiltro('gender', 'genderless')}
+                        onClick={() => montarFiltro('gender', 'genderless')}>Sem gênero
+                    </span>
+                    <span
+                        className={marcarFiltro('gender', 'unknown')}
+                        onClick={() => montarFiltro('gender', 'unknown')}>Desconhecido
+                    </span>
+                </div>
             </div>
       </div>
     )

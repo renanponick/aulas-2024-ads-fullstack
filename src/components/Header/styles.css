@@ -9,39 +9,32 @@ header {
     gap: 1em;
 }
 
-nav {
+.menu {
     background-color: #4CAF50;
 }
 
-nav ul{
-    list-style: none;
-    display: flex;
+.menu ul{
+    margin: 0;
     padding: 0;
-    margin: 0;
+    display: flex;
+    justify-content: space-around;
 }
 
-nav ul li{
-    flex: 1;
+.menu li{
+    color: white;
     text-align: center;
-    height: 20px;
-    width: 100%;
-    padding: 0.5em;
+    height: max-content;
+    width: 99%;
+    padding: 5px;
+    transition: background-color 1s ease;
 }
 
-nav ul a{
-    width: 40%;
+.menu a{
+    text-decoration: none;
+    width: 50%;
     margin: 0;
 }
 
-a {
-    text-decoration: none;
-    color: #fff;
-}
-
-ul a:hover {
-    color: #fff;
-}
-
-nav ul li:hover {
+.menu li:hover {
     background-color: #037e22;
 }

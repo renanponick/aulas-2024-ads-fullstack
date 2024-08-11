@@ -4,7 +4,7 @@ export default function List({ titulo }){
     return (
         <section>
             <h2>{titulo}</h2>
-            <div class="container">
+            <div className="container">
                 <div>
                     <h3>Lista não ordenada:</h3>
                     <ul>

@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Header />
-      <div>
+      <div className='content'>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/api" element={<RickAndMortyApi />} />

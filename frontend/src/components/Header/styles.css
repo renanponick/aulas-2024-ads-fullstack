@@ -9,6 +9,17 @@ header {
     gap: 1em;
 }
 
+header a {
+    background-color: rgb(7, 113, 145);
+    padding: 10px 20px;
+    color: #FFF;
+    border-radius: 20px;
+}
+header a:hover {
+    background-color: rgb(7, 90, 116);
+    color: #FFF;
+}
+
 .menu {
     background-color: #4CAF50;
 }

@@ -1,5 +1,5 @@
 header {
-    background-color: #4CAF50;
+    background-color: #07912a;
     color: white;
     padding: 1em;
     display: flex;
@@ -7,4 +7,41 @@ header {
     align-items: center; /* Alinha verticalmente */
     justify-content: center; /* Centraliza horizontalmente */
     gap: 1em;
+}
+
+nav {
+    background-color: #4CAF50;
+}
+
+nav ul{
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li{
+    flex: 1;
+    text-align: center;
+    height: 20px;
+    width: 100%;
+    padding: 0.5em;
+}
+
+nav ul a{
+    width: 40%;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+ul a:hover {
+    color: #fff;
+}
+
+nav ul li:hover {
+    background-color: #037e22;
 }

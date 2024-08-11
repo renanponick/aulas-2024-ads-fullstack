@@ -6,11 +6,9 @@ export default function Pagination({ page, totalPages, onPageChange }){
     };
     
     const handleNext = () => {
-        console.log("oi")
         if (page < totalPages){
             onPageChange(page + 1)
         };
-        console.log(page)
     };
     
     return (

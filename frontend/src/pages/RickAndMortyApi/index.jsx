@@ -23,7 +23,6 @@ export default function RickAndMortyApi() {
       .then(response => response.text())
       .then(result => { return result })
       .catch(error => console.log('error', error));
-    console.log(busca)
     const response = JSON.parse(result)
 
     return { info: response.info, char: response.results, }

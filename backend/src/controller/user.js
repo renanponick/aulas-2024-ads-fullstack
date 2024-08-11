@@ -1,33 +1,26 @@
-const user = require("../model/user");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-
-const SECRET_KEY = "exemplo";
-const SALT_VALUE = 10;
+const UserModel = require("../model/user");
 
 class UserController {
-  async createUser(nome, email, senha) {
+  createUser(nome, email, senha) {
     if (nome === undefined || email === undefined || senha === undefined) {
       throw new Error("Nome, email e senha são obrigatórios.");
     }
 
-    const cypherSenha = await bcrypt.hash(String(senha), SALT_VALUE);
-
-    const userValue = await user.create({
+    const userValue = UserModel.Create({
       nome,
       email,
-      senha: cypherSenha,
+      senha
     });
 
     return userValue;
   }
 
-  async findUser(id) {
+  findUser(id) {
     if (id === undefined) {
       throw new Error("Id é obrigatório.");
     }
 
-    const userValue = await user.findByPk(id);
+    const userValue = UserModel.FindByIndex(id);
 
     if (!userValue) {
       throw new Error("Usuário não encontrado.");
@@ -36,67 +29,27 @@ class UserController {
     return userValue;
   }
 
-  async update(id, nome, email, senha) {
-    const oldUser = await user.findByPk(id);
-    if(email){
-      const sameEmail = await user.findOne({ where: { email } });
-      if (sameEmail && sameEmail.id !== id) {
-        throw new Error("Email já cadastrado.");
-      }
-    }
-    oldUser.nome = nome || oldUser.nome;
-    oldUser.email = email || oldUser.email;
-    oldUser.senha = senha
-      ? await bcrypt.hash(String(senha), SALT_VALUE)
-      : oldUser.senha;
-    oldUser.save();
+  update(id, nome, email, senha) {
+    const user = UserModel.FindByIndex(id);
+    user.nome = nome || user.nome;
+    user.email = email || user.email;
+    user.senha = senha || user.senha;
+    UserModel.Update(id, user);
 
-    return oldUser;
+    return user;
   }
 
-  async delete(id) {
+  delete(id) {
     if (id === undefined) {
       throw new Error("Id é obrigatório.");
     }
-    const userValue = await this.findUser(id);
-    userValue.destroy();
+    UserModel.Delete(id);
 
     return;
   }
 
-  async find() {
-    return user.findAll();
-  }
-
-  async login(email, senha) {
-    if (email === undefined || senha === undefined) {
-      throw new Error("Email e senha são obrigatórios.");
-    }
-
-    const userValue = await user.findOne({ where: { email } });
-
-    if (!userValue) {
-      throw new Error("[1] Usuário e senha inválidos.");
-    }
-
-    const senhaValida = bcrypt.compare(String(senha), userValue.senha);
-    if (!senhaValida) {
-      throw new Error("[2] Usuário e senha inválidos.");
-    }
-
-    return jwt.sign({ id: userValue.id }, SECRET_KEY, { expiresIn: 60 * 60 });
-  }
-
-  async validateToken(token) {
-    if (!token) {
-      throw new Error("Token inválido");
-    }
-
-    try {
-      await jwt.verify(token, SECRET_KEY);
-    } catch {
-      throw new Error("Token inválido");
-    }
+  find() {
+    return UserModel.FindAll();
   }
 }
 

@@ -23,7 +23,6 @@ export default function RickAndMortyApi() {
       .then(response => response.text())
       .then(result => { return result })
       .catch(error => console.log('error', error));
-    console.log(busca)
     const response = JSON.parse(result)
 
     return { info: response.info, char: response.results, }
@@ -46,16 +45,16 @@ export default function RickAndMortyApi() {
   }, [page, busca])
 
   return (
-    <main>
-    <Filter busca={busca} setBusca={setBusca} />
-    <div className='lista-principal'>
-        { conteudo }
+    <div>
+      <Filter busca={busca} setBusca={setBusca} />
+      <div className='lista-principal'>
+          { conteudo }
+      </div>
+      <Pagination 
+        page={page}
+        totalPages={totalPages}
+        onPageChange={setPage}
+      />
     </div>
-    <Pagination 
-      page={page}
-      totalPages={totalPages}
-      onPageChange={setPage}
-    />
-    </main>
   )
 }

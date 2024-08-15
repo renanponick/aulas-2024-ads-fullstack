@@ -10,13 +10,13 @@ function App() {
   return (
     <>
       <Header />
-      <div className='content'>
+      <main className='content'>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/api" element={<RickAndMortyApi />} />
           <Route path="/login" element={<Login />} />
         </Routes>
-      </div>
+      </main>
       <Footer />
     </>
   )

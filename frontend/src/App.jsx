@@ -9,12 +9,12 @@ function App() {
   return (
     <>
       <Header />
-      <div className='content'>
+      <main className='content'>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/api" element={<RickAndMortyApi />} />
         </Routes>
-      </div>
+      </main>
       <Footer />
     </>
   )

@@ -45,16 +45,16 @@ export default function RickAndMortyApi() {
   }, [page, busca])
 
   return (
-    <main>
-    <Filter busca={busca} setBusca={setBusca} />
-    <div className='lista-principal'>
-        { conteudo }
+    <div>
+      <Filter busca={busca} setBusca={setBusca} />
+      <div className='lista-principal'>
+          { conteudo }
+      </div>
+      <Pagination 
+        page={page}
+        totalPages={totalPages}
+        onPageChange={setPage}
+      />
     </div>
-    <Pagination 
-      page={page}
-      totalPages={totalPages}
-      onPageChange={setPage}
-    />
-    </main>
   )
 }

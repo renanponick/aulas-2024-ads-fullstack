@@ -3,5 +3,5 @@
     flex-direction: column;
     align-items: center; /* Alinha verticalmente */
     justify-content: center; /* Centraliza horizontalmente */
-    height: 734px;
+    min-height: 81.5vh;
 }

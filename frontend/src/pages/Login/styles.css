@@ -3,13 +3,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 84.4vh;
     background-color: #f5f5f5;
   }
   
   .login-form {
     background: white;
-    padding: 20px;
+    padding: 50px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
@@ -34,6 +34,7 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box; 
   }
   
   .button {
@@ -45,10 +46,20 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .back-button {
+    background-color: #8a8a8a;
+    color: rgb(2, 2, 2);
   }
   
   .button:hover {
     background-color: #0056b3;
+  }
+
+  .back-button:hover {
+    background-color: #505050;
   }
   
   .error {

@@ -1,51 +1,48 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import './styles.css'
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../Context';
 
-export default function Login() {
-  const { login } = useContext(AuthContext);
+export default function SignUp() {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    navigate('/');
+    navigate(-1);
   };
 
-  const handleCreateAccount = () => {
-    navigate('/signup')
-  }
-
+  const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  // const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const body = JSON.stringify({ email, senha })
+    const body = JSON.stringify({ nome, email, senha })
     const headers = { 'Content-Type': 'application/json' }
     const method = 'post'
-    console.log(body)
+  
     const responseApi = await fetch(
-      'http://localhost:3000/api/v1/login',
+      'http://localhost:3000/api/v1/user',
       { method, headers, body }
     )
-      .then(response => response.text())
+      .then(response => response)
       .then(result => { return result })
       .catch(error => console.log('error', error));
-    const response = JSON.parse(responseApi)
-    console.log(response)
-    if(response.token) {
-      login(response.token)
-      navigate('/')
+
+    if(responseApi.ok){
+      navigate('/login')
+    } else {
+      console.log(responseApi)
     }
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form">
-        <h2>Login</h2>
-        {/* Seus campos de login aqui */}
+    <div className="signup-container">
+      <form className="signup-form">
+        <h2>Cadastre-se</h2>
+        <div className="input-group">
+          <label htmlFor="nome">Nome:</label>
+          <input type="text" id="nome" required value={nome} onChange={(e) => setNome(e.target.value)} />
+        </div>
         <div className="input-group">
           <label htmlFor="email">Email:</label>
           <input type="text" id="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -54,8 +51,7 @@ export default function Login() {
           <label htmlFor="senha">Senha:</label>
           <input type="password" id="senha" required value={senha} onChange={(e) => setSenha(e.target.value)}/>
         </div>
-        <p>Não possui conta? <spam className="signup" onClick={handleCreateAccount}>Cadastre-se</spam></p>
-        <button className="button" type="submit" onClick={handleSubmit}>Entrar</button>
+        <button className="button" type="submit" onClick={handleSubmit}>Cadastrar-se</button>
         <button className="button back-button" onClick={handleBackClick}>
           Voltar
         </button>

@@ -4,6 +4,8 @@ const database = require("./config/database");
 
 const UserApi = require("./api/user");
 const UserRouter = require("./routes/user");
+const CharacterRouter = require("./routes/character");
+const authMiddleware = require("./middleware/authMiddleware");
 
 const app = express();
 app.use(express.json());
@@ -19,8 +21,9 @@ app.post("/api/v1/login", UserApi.login);
 app.post("/api/v1/user", UserApi.createUser);
 
 // // Rotas com token
-app.use(UserApi.validateToken);
+app.use(authMiddleware);
 app.use("/api/v1/user", UserRouter);
+app.use("/api/v1/character", CharacterRouter);
 
 database.db
   .sync({ force: false })

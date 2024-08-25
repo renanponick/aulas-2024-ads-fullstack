@@ -35,6 +35,12 @@ export default function Header(){
                         { token && <Link to="/api">
                             <li>Rick And Morty API</li>
                         </Link> }
+                        {/* { token && <Link to="/profile">
+                            <li>Favoritos</li>
+                        </Link> } */}
+                        { token && <Link to="/profile">
+                            <li>Seu Perfil</li>
+                        </Link> }
                     </ul>
                 </nav>
             }

@@ -7,7 +7,7 @@ const SALT_VALUE = 10;
 
 class UserController {
   async createUser(nome, email, senha) {
-    if (nome === undefined || email === undefined || senha === undefined) {
+    if (!nome || !email || !senha) {
       throw new Error("Nome, email e senha são obrigatórios.");
     }
 
@@ -85,18 +85,6 @@ class UserController {
     }
 
     return jwt.sign({ id: userValue.id }, SECRET_KEY, { expiresIn: 60 * 60 });
-  }
-
-  async validateToken(token) {
-    if (!token) {
-      throw new Error("Token inválido");
-    }
-
-    try {
-      await jwt.verify(token, SECRET_KEY);
-    } catch {
-      throw new Error("Token inválido");
-    }
   }
 }
 

@@ -44,6 +44,15 @@ class UserApi {
         }
     }
 
+    async findContext(req, res) {
+        try {
+            const user = await UserController.findUser(req?.session?.id || 0)
+            return res.status(200).send(user)
+        } catch (e) {
+            return res.status(400).send({ error: `Erro ao listar usuário ${e.message}`})
+        }
+    }
+
     async login(req, res) {
         const { email, senha } = req.body
         console.log(req.body)
@@ -51,17 +60,6 @@ class UserApi {
             const token = await UserController.login(email, senha)
 
             res.status(200).send({ token })
-        } catch (e) {
-            res.status(400).send({ error: e.message })
-        }
-    }
-
-    async validateToken(req, res, next) {
-        const token = req.headers.authorization
-
-        try {
-            await UserController.validateToken(token)
-            next()
         } catch (e) {
             res.status(400).send({ error: e.message })
         }

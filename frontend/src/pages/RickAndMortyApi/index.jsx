@@ -1,30 +1,39 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './styles.css'
 import Card from '../../components/Card'
-import Filter from '../../components/Filter'
 import Pagination from '../../components/Pagination'
+import { AuthContext } from '../../Context'
+import AddButton from '../../components/AddButton'
+import { useNavigate } from 'react-router-dom'
 
 export default function RickAndMortyApi() {
+  const { token } = useContext(AuthContext);
   const [ conteudo, setConteudo ] = useState(<></>)
-  const [ busca, setBusca ] = useState('');
   const [ page, setPage ] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [ totalPages, setTotalPages ] = useState(1);
+  const navigate = useNavigate();
+
+  const handleAddClick = () => {
+    navigate('/character')
+  }
 
   async function carregarTodosPersonagens() {
     var requestOptions = {
+      headers: {
+        authorization: token
+      },
       method: 'GET',
-      redirect: 'follow'
+      redirect: 'follow',
     };
     
     const result = await fetch(
-      `https://rickandmortyapi.com/api/character?page=${page}${busca}`,
+      `http://localhost:3000/api/v1/character?page=${page}`,
       requestOptions
     )
       .then(response => response.text())
       .then(result => { return result })
       .catch(error => console.log('error', error));
     const response = JSON.parse(result)
-
     return { info: response.info, char: response.results, }
   }
 
@@ -32,9 +41,11 @@ export default function RickAndMortyApi() {
     const { char: todosPersonagens, info } = await carregarTodosPersonagens()
     setTotalPages(info.pages)
 
-    return todosPersonagens.map(personagem =>
-      <Card data={personagem} />
-    )
+    return todosPersonagens.map(personagem =>{
+      return <Card data={personagem} onClick={() => {
+        navigate('/character', { state: { personagem, isUpdate: true } })
+      }} />
+    })
   }
 
   useEffect(() => {
@@ -42,14 +53,14 @@ export default function RickAndMortyApi() {
       setConteudo(await listaPersonagens())
     }
     getConteudo()
-  }, [page, busca])
+  }, [page])
 
   return (
     <div>
-      <Filter busca={busca} setBusca={setBusca} />
       <div className='lista-principal'>
           { conteudo }
       </div>
+      <AddButton onClick={handleAddClick} />
       <Pagination 
         page={page}
         totalPages={totalPages}

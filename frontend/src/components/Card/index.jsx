@@ -1,12 +1,30 @@
+import { useState } from 'react'
 import { getEspecie, getGenero, getStatus } from '../../fns/translate'
 import './styles.css'
+import edit from './../../assets/edit.svg'
 
-export default function Card({ data: personagem }){
+export default function Card({ data: personagem, onClick }){
+    const [isMouseHover, setIsMouseHover] = useState(false)
+
     return (
-        <div className='card char' key={personagem.id}>
-            <img src={personagem.image} alt={personagem.name}/>
+        <div
+            className='card char'
+            key={personagem.id}
+            onClick={onClick}
+            onMouseEnter={()=> setIsMouseHover(true)}
+            onMouseLeave={()=> setIsMouseHover(false)}
+        >
+            
+            <img
+                className='char-image'
+                src={personagem.image}
+                alt={personagem.name}
+            />
 
-            <h2>{personagem.name}</h2>
+            <h2>
+                {personagem.name} 
+                { isMouseHover && <img src={edit} className='edit' /> }
+            </h2>
 
             <div className='char-info'>
             <span><b>Espécie: </b>{getEspecie(personagem.species)}</span>
@@ -14,7 +32,7 @@ export default function Card({ data: personagem }){
             </div>
 
             <div>
-            <div className='lista-secundaria'>
+            {/* <div className='lista-secundaria'>
                 <b>Participações:</b>
                 { personagem.episode.map(
                 ep => 
@@ -22,7 +40,7 @@ export default function Card({ data: personagem }){
                         Ep-{ (ep.split('episode/'))[1] }
                     </span>
                 ) }
-            </div>
+            </div> */}
             <h5><b>Status: </b> {getStatus(personagem.status)}</h5>
             </div>
         </div>

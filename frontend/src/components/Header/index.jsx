@@ -13,7 +13,7 @@ export default function Header(){
     const isLoginRoute = location.pathname === '/login';
 
     return (
-        <>
+        <div>
             <header>
                 <h1>Minha Página React</h1>
                 <img src={reactLogo} alt='Logo do React' />
@@ -44,6 +44,6 @@ export default function Header(){
                     </ul>
                 </nav>
             }
-        </>
+        </div>
     )
 }

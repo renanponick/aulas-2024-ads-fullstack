@@ -2,8 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 74.9vh;
-    background-color: #e8e7e7;
 }
 .character-info {
     padding: 25px;

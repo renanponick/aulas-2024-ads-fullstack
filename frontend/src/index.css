@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* 
+  
+  LEMBRAR
+
+  para conseguir definir um tamanho de tela, sempre definir o tamanho do container pai
+  depois disso vc apenas posiciona os filhos, não fica colocando tamanho 
+  dentro deles para que eles "preencham" a tela de acordo com o que vc acha
+  isso só vai estragar a estilização ou vai tornar ela fixa
+
+*/
+#root{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+}

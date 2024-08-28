@@ -12,10 +12,10 @@ export default function Form() {
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
-        setFormData({
-            ...formData,
+        setFormData(prev => ({
+            ...prev,
             [name]: type === 'file' ? files[0] : value
-        });
+        }));
         console.log(name, value, type, files)
     };
 

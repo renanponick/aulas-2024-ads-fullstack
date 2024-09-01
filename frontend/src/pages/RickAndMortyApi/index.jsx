@@ -16,16 +16,18 @@ export default function RickAndMortyApi() {
       redirect: 'follow'
     };
     
-    const result = await fetch(
+    const response = await fetch(
       `https://rickandmortyapi.com/api/character?page=${page}${busca}`,
       requestOptions
     )
-      .then(response => response.text())
-      .then(result => { return result })
-      .catch(error => console.log('error', error));
-    const response = JSON.parse(result)
 
-    return { info: response.info, char: response.results, }
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    return { info: data.info, char: data.results, }
   }
 
   async function listaPersonagens() {

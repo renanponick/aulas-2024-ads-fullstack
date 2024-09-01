@@ -22,22 +22,22 @@ export default function Profile() {
       redirect: 'follow',
     };
     
-    const result = await fetch(
+    const response = await fetch(
       `http://localhost:3000/api/v1/user/context`,
       requestOptions
     )
-      .then(response => response.text())
-      .then(result => { return result })
-      .catch(error => console.log('error', error));
-    const response = JSON.parse(result)
-  
-    if(response.id) {
-      setId(response.id)
-      setNome(response.nome)
-      setEmail(response.email)
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    return response
+    const data = await response.json();
+  
+    if(data.id) {
+      setId(data.id)
+      setNome(data.nome)
+      setEmail(data.email)
+    }
   }
 
   const handleSaveUpdate = async () => {
@@ -49,11 +49,10 @@ export default function Profile() {
       `http://localhost:3000/api/v1/user/${id}`,
       { method, headers, body }
     )
-      .then(response => response)
-      .then(result => { return result })
-      .catch(error => console.log('error', error));
+
     if(apiResponse.ok){
-      await carregarPerfil()
+      setNome(updNome)
+      setEmail(updEmail)
       setIsUpdate(false)
     }
   }
@@ -75,9 +74,7 @@ export default function Profile() {
         `http://localhost:3000/api/v1/user/${id}`,
         { method, headers }
       )
-        .then(response => response)
-        .then(result => { return result })
-        .catch(error => console.log('error', error));
+
       if(apiResponse.ok){
         logout()
         navigate('/')

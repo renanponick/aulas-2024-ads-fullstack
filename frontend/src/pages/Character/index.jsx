@@ -33,9 +33,7 @@ export default function Character() {
       `http://localhost:3000/api/v1/character/${personagem.id}`,
       { method, headers, body }
     )
-      .then(response => response)
-      .then(result => { return result })
-      .catch(error => console.log('error', error));
+
     if(apiResponse.ok){
       navigate('/api')
     }
@@ -51,9 +49,7 @@ export default function Character() {
         `http://localhost:3000/api/v1/character/${personagem.id}`,
         { method, headers }
       )
-        .then(response => response)
-        .then(result => { return result })
-        .catch(error => console.log('error', error));
+
       if(apiResponse.ok){
         navigate('/api')
       }

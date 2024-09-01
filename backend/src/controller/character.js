@@ -47,20 +47,22 @@ class CharactersController {
 
         while(hasMore){
           try {
-            const result = await fetch(
-              `https://rickandmortyapi.com/api/character?page=${page}`,
+            const response = await fetch(
+              `https://rickandmortyapi.com/api/character?page=${page}${busca}`,
               requestOptions
             )
-              .then(response => response.text())
-              .then(result => { return result })
-              .catch(error => console.log('error', error));
-            const response = JSON.parse(result)
+        
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+        
+            const data = await response.json();
 
-            if(!response?.info?.next){
+            if(!data?.info?.next){
               hasMore = false
             }
 
-            response.results.map(it => {
+            data.results.map(it => {
               characters.create({
                 id: it.id,
                 name: it.name,
@@ -112,6 +114,7 @@ class CharactersController {
     if(!oldCharacters){
       throw new Error('Personagem não encontrado!')
     }
+    console.log(image)
 
     oldCharacters.name = name || oldCharacters.name;
     oldCharacters.species = species || oldCharacters.species;

@@ -25,16 +25,16 @@ export default function Login() {
     const body = JSON.stringify({ email, senha })
     const headers = { 'Content-Type': 'application/json' }
     const method = 'post'
-    console.log(body)
+
     const responseApi = await fetch(
       'http://localhost:3000/api/v1/login',
       { method, headers, body }
     )
-      .then(response => response.text())
-      .then(result => { return result })
-      .catch(error => console.log('error', error));
-    const response = JSON.parse(responseApi)
-    console.log(response)
+    if (!responseApi.ok) {
+      throw new Error(`HTTP error! status: ${responseApi.status}`);
+    }
+    const response = await responseApi.json();
+
     if(response.token) {
       login(response.token)
       navigate('/')

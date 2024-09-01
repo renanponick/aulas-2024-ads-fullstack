@@ -14,10 +14,10 @@ class CharactersApi {
 
     async updateCharacter(req, res) {
         const { id } = req.params
-        const { name, email, senha } = req.body
+        const { name, species, image, gender, status } = req.body
 
         try {
-            const characters = await CharactersController.update(Number(id), name, email, senha)
+            const characters = await CharactersController.update(Number(id), name, species, image, gender, status)
             return res.status(200).send(characters)
         } catch (e) {
             return res.status(400).send({ error: `Erro ao alterar personagem: ${e.message}`})

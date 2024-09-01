@@ -63,17 +63,18 @@ function App() {
       redirect: 'follow'
     };
     
-    const result = await fetch(
-      "https://rickandmortyapi.com/api/character",
+    const response = await fetch(
+      `https://rickandmortyapi.com/api/character?page=${page}${busca}`,
       requestOptions
     )
-      .then(response => response.text())
-      .then(result => { return result })
-      .catch(error => console.log('error', error));
 
-    const char = JSON.parse(result)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-    return char.results
+    const data = await response.json();
+
+    return data.results
   }
 
   async function listaPersonagens() {

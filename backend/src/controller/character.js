@@ -48,7 +48,7 @@ class CharactersController {
         while(hasMore){
           try {
             const response = await fetch(
-              `https://rickandmortyapi.com/api/character?page=${page}${busca}`,
+              `https://rickandmortyapi.com/api/character?page=${page}`,
               requestOptions
             )
         
@@ -61,6 +61,7 @@ class CharactersController {
             if(!data?.info?.next){
               hasMore = false
             }
+            console.log(data)
 
             data.results.map(it => {
               characters.create({

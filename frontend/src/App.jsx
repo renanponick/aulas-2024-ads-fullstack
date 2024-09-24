@@ -9,6 +9,8 @@ import PrivateRoute from './components/PrivateRoute'
 import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
 import Character from './pages/Character';
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -24,6 +26,18 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        style={{ width: '50%' }}
+      />
       <Footer />
     </AuthProvider>
   )

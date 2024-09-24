@@ -18,6 +18,13 @@ class User {
       senha: {
         type: database.db.Sequelize.STRING,
       },
+      permissao: {
+        type: database.db.Sequelize.STRING,
+        // sendo ele um enum admin e user
+        validate: {
+          isIn: [["admin", "user"]],
+        },
+      },
     });
   }
 }

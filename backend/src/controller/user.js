@@ -17,6 +17,7 @@ class UserController {
       nome,
       email,
       senha: cypherSenha,
+      permissao: "user"
     });
 
     return userValue;
@@ -86,6 +87,7 @@ class UserController {
 
     return jwt.sign({ id: userValue.id }, SECRET_KEY, { expiresIn: 60 * 60 });
   }
+
 }
 
 module.exports = new UserController();

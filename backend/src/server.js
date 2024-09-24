@@ -16,11 +16,10 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "OK" });
 });
 
-// // Rotas sem token
 app.post("/api/v1/login", UserApi.login);
 app.post("/api/v1/user", UserApi.createUser);
 
-app.use("/api/v1/user", authMiddleware, UserRouter);
+app.use("/api/v1/user", authMiddleware(), UserRouter);
 app.use("/api/v1/character", CharacterRouter);
 
 database.db

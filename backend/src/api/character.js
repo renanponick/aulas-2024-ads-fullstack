@@ -25,7 +25,7 @@ class CharactersApi {
     }
 
     async deleteCharacter(req, res) {
-        const { id } = req.params
+        const { id = 0 } = req.params
 
         try {
             await CharactersController.delete(Number(id))
@@ -46,7 +46,7 @@ class CharactersApi {
     }
 
     async findAllCharacters(req, res) {
-        const { page } = req.query
+        const { page = 1 } = req.query
         try {
             const characterss = await CharactersController.findAll(Number(page))
             return res.status(200).send(characterss)

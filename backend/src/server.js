@@ -21,7 +21,7 @@ app.post("/api/v1/login", UserApi.login);
 app.post("/api/v1/user", UserApi.createUser);
 
 app.use("/api/v1/user", authMiddleware, UserRouter);
-app.use("/api/v1/character", authMiddleware, CharacterRouter);
+app.use("/api/v1/character", CharacterRouter);
 
 database.db
   .sync({ force: false })

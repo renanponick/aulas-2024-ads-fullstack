@@ -20,10 +20,8 @@ app.get("/", (req, res) => {
 app.post("/api/v1/login", UserApi.login);
 app.post("/api/v1/user", UserApi.createUser);
 
-// // Rotas com token
-app.use(authMiddleware);
-app.use("/api/v1/user", UserRouter);
-app.use("/api/v1/character", CharacterRouter);
+app.use("/api/v1/user", authMiddleware, UserRouter);
+app.use("/api/v1/character", authMiddleware, CharacterRouter);
 
 database.db
   .sync({ force: false })

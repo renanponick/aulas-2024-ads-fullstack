@@ -5,6 +5,7 @@
      - `nome`: Nome do usuário.
      - `email`: Email do usuário.
      - `senha`: Senha de acesso.
+     - `bloqueado`: Se o usuário está ou não bloqueado.
      - `role`: Definição do papel do usuário (ex.: administrador, visualizador).
 
 **Classe `SUA-API`**

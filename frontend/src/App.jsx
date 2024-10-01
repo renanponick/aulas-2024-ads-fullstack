@@ -4,13 +4,13 @@ import RickAndMortyApi from './pages/RickAndMortyApi'
 import Home from './pages/Home'
 import { Routes, Route } from 'react-router-dom';
 import Login from './pages/Login'
-import { AuthProvider } from './Context'
-import PrivateRoute from './components/PrivateRoute'
+import { AuthProvider } from './auth/Context'
 import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
 import Character from './pages/Character';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
   return (

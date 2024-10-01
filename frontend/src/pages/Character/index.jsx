@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import './styles.css'
-import { AuthContext } from '../../Context'
+import { AuthContext } from '../../auth/Context'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 

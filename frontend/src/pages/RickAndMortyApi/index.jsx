@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import './styles.css'
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
-import { AuthContext } from '../../Context'
+import { AuthContext } from '../../auth/Context'
 import AddButton from '../../components/AddButton'
 import { useNavigate } from 'react-router-dom'
 

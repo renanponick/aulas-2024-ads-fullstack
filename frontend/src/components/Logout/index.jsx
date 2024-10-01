@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { AuthContext } from '../../Context';
+import { AuthContext } from '../../auth/Context';
 import './styles.css'
 
 export default function LogoutButton() {

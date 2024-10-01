@@ -2,7 +2,7 @@ import viteLogo from '../../../public/vite.svg'
 import reactLogo from '../../assets/react.svg'
 import { Link, useLocation } from 'react-router-dom';
 import './styles.css'
-import { AuthContext } from '../../Context';
+import { AuthContext } from '../../auth/Context';
 import { useContext } from 'react';
 import LogoutButton from '../Logout';
 

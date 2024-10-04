@@ -2,6 +2,8 @@ import { useContext, useState } from 'react';
 import './styles.css'
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../auth/Context';
+import { loginUser } from '../../api/user';
+import { toast } from 'react-toastify';
 
 export default function Login() {
   const { login } = useContext(AuthContext);
@@ -17,27 +19,28 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  // const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const body = JSON.stringify({ email, senha })
-    const headers = { 'Content-Type': 'application/json' }
-    const method = 'post'
-
-    const responseApi = await fetch(
-      'http://localhost:3000/api/v1/login',
-      { method, headers, body }
-    )
-    if (!responseApi.ok) {
-      throw new Error(`HTTP error! status: ${responseApi.status}`);
+    if (!email || !senha) {
+        return toast('Informe o e-mail e a senha para continuar!');
     }
-    const response = await responseApi.json();
 
-    if(response.token) {
-      login(response.token)
-      navigate('/')
+    try {
+        const response = await loginUser(email, senha);
+        if (response.token) {
+            login(response.token);
+            return navigate('/home');
+        }
+    } catch (error) {
+        if (error.response.status === 403) {
+          return toast("Sem permissão.");
+        }
+        if (error.response.status === 401 || error.response.status === 404) {
+          return toast('Email ou senha inválido, tente novamente!');
+        }
+        return toast('Erro inesperado, tente novamente mais tarde!');
     }
   };
 
@@ -45,7 +48,6 @@ export default function Login() {
     <div className="login-container">
       <form className="login-form">
         <h2>Login</h2>
-        {/* Seus campos de login aqui */}
         <div className="input-group">
           <label htmlFor="email">Email:</label>
           <input type="text" id="email" required value={email} onChange={(e) => setEmail(e.target.value)} />

@@ -1,15 +1,14 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import './styles.css'
-import { AuthContext } from '../../auth/Context'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { createCharacter, deleteCharacter } from '../../api/character';
 
 const icon = "https://freesvg.org/img/abstract-user-flat-1.png"
 
 export default function Character() {
   const location = useLocation();
   const { isUpdate, personagem: char } = location.state || {}
-  const { token } = useContext(AuthContext);
   const navigate = useNavigate();
   const [personagem, setPersonagem] = useState(char || {
     id: '', name: '', status: '', gender: '', species: '', image: null
@@ -26,49 +25,41 @@ export default function Character() {
   };
 
   const handleAddSave = async () => {
-      const body = JSON.stringify({ ...personagem })
-      const headers = { 'Content-Type': 'application/json', 'Authorization': token }
-      const method = isUpdate ? 'PUT' : 'POST'
-    
-      const apiResponse = await fetch(
-        `http://localhost:3000/api/v1/character/${personagem.id}`,
-        { method, headers, body }
-      )
+    try{
+      const apiResponse = await createCharacter(personagem)
 
       if(apiResponse.ok){
         navigate('/api')
       }
-      if(apiResponse.status == 403) {
-        toast("Você não ter permissão para realizar esta ação.");
-        navigate('/api')
+    } catch (error) {
+      if (error.status === 403) {
+        return toast("Sem permissão.");
       }
+      if (error.status === 401 || error.status === 404) {
+        return toast('Email ou senha inválido, tente novamente!');
+      }
+    }
   }
 
   const handleDelete = async () => {
     try {
       const response = prompt('Para deletar digite o nome do personagem')
       if(response === personagem.name) {
-        const headers = { 'Content-Type': 'application/json', 'Authorization': token }
-        const method = 'DELETE'
-      
-        const apiResponse = await fetch(
-          `http://localhost:3000/api/v1/character/${personagem.id}`,
-          { method, headers }
-        )
+        const apiResponse = await deleteCharacter(personagem.id)
 
         if(apiResponse.ok){
-          navigate('/api')
-        }
-        if(apiResponse.status == 403) {
-          toast("Você não ter permissão para realizar esta ação.");
           navigate('/api')
         }
       } else {
         toast("Nome Inválido, processo cancelado.");
       }
-        
     } catch (error) {
-      toast("Sem permissão.");
+      if (error.status === 403) {
+        return toast("Sem permissão.");
+      }
+      if (error.status === 401 || error.status === 404) {
+        return toast('Email ou senha inválido, tente novamente!');
+      }
     }
   }
 

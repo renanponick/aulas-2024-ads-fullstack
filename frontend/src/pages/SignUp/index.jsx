@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './styles.css'
 import { useNavigate } from 'react-router-dom';
+import { createUser } from '../../api/user';
+import { toast } from 'react-toastify';
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -14,24 +16,25 @@ export default function SignUp() {
   const [senha, setSenha] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    const body = JSON.stringify({ nome, email, senha })
-    const headers = { 'Content-Type': 'application/json' }
-    const method = 'post'
-  
-    const responseApi = await fetch(
-      'http://localhost:3000/api/v1/user',
-      { method, headers, body }
-    )
-      .then(response => response)
-      .then(result => { return result })
-      .catch(error => console.log('error', error));
-
-    if(responseApi.ok){
-      navigate('/login')
-    } else {
+      const responseApi = await createUser({nome, email, senha})
       console.log(responseApi)
+      if(responseApi.id){
+        navigate('/login')
+      } else {
+        console.log(responseApi)
+      }
+    } catch (error) {
+      console.log(error)
+      if (error.status === 403) {
+        return toast("Sem permissão.");
+      }
+      if (error.status === 401 || error.status === 404) {
+        return toast('Email ou senha inválido, tente novamente!');
+      }
+      toast('Erro inesperado, tente novamente mais tarde!');
     }
   };
 

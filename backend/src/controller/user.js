@@ -85,7 +85,7 @@ class UserController {
       throw new Error("[2] Usuário e senha inválidos.");
     }
 
-    return jwt.sign({ id: userValue.id }, SECRET_KEY, { expiresIn: 60 * 60 });
+    return jwt.sign({ id: userValue.id, role: userValue.permissao }, SECRET_KEY, { expiresIn: 60 * 60 });
   }
 
 }

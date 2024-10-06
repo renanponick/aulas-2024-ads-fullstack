@@ -28,10 +28,12 @@ export default function Login() {
     }
 
     try {
+        // 7 - Usar Axios para fazer a requisição de login
         const response = await loginUser(email, senha);
         if (response.token) {
+            // 8 - Adicionar login ao AuthContext
             login(response.token);
-            return navigate('/home');
+            return navigate('/');
         }
     } catch (error) {
         if (error.response.status === 403) {

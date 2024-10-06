@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { AuthContext } from '../auth/Context';
 
-
+// 5 - Adicionar PrivateRoute
 const PrivateRoute = () => {
   const { token } = useContext(AuthContext);
 

@@ -3,7 +3,7 @@ import { getEspecie, getGenero, getStatus } from '../../fns/translate'
 import './styles.css'
 import edit from './../../assets/edit.svg'
 
-export default function Card({ data: personagem, onClick }){
+export default function Card({ data: personagem, onClick, editable }){
     const [isMouseHover, setIsMouseHover] = useState(false)
 
     return (
@@ -11,8 +11,8 @@ export default function Card({ data: personagem, onClick }){
             className='card char'
             key={personagem.id}
             onClick={onClick}
-            onMouseEnter={()=> setIsMouseHover(true)}
-            onMouseLeave={()=> setIsMouseHover(false)}
+            onMouseEnter={editable ? ()=> setIsMouseHover(true) : null}
+            onMouseLeave={editable ? ()=> setIsMouseHover(false) : null}
         >
             
             <img

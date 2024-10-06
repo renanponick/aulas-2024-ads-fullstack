@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './styles.css'
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
 import AddButton from '../../components/AddButton'
 import { useNavigate } from 'react-router-dom'
 import { getCharacters } from '../../api/character'
+import { AuthContext } from '../../auth/Context'
 
+// 9 - Ajustar Roles
 export default function RickAndMortyApi() {
+  const { role } = useContext(AuthContext);
   const [ conteudo, setConteudo ] = useState(<></>)
   const [ page, setPage ] = useState(1);
   const [ totalPages, setTotalPages ] = useState(1);
@@ -27,9 +30,16 @@ export default function RickAndMortyApi() {
     setTotalPages(info.pages)
 
     return todosPersonagens.map(personagem =>{
-      return <Card key={personagem.id} data={personagem} onClick={() => {
-        navigate('/character', { state: { personagem, isUpdate: true } })
-      }} />
+      return <Card
+        key={personagem.id}
+        data={personagem}
+        editable={role === 'admin'}
+        onClick={
+          role === 'admin' 
+            ? () => navigate('/character', { state: { isUpdate: true, personagem } })
+            : () => {}
+        }
+      />
     })
   }
 
@@ -45,7 +55,7 @@ export default function RickAndMortyApi() {
       <div className='lista-principal'>
           { conteudo }
       </div>
-      <AddButton onClick={handleAddClick} />
+      { role === 'admin' ? <AddButton onClick={handleAddClick} /> : null }
       <Pagination 
         page={page}
         totalPages={totalPages}
@@ -54,3 +64,5 @@ export default function RickAndMortyApi() {
     </div>
   )
 }
+
+

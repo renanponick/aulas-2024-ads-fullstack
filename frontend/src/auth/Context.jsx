@@ -2,6 +2,7 @@
 import { createContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
+// 4 - Adicionar Provider, isTokenValid e getRole
 const isTokenValid = (token) => {
   try {
     const decoded = jwtDecode(token);
@@ -15,6 +16,7 @@ const isTokenValid = (token) => {
 const getRole = (token) => {
   try {
     const decoded = jwtDecode(token);
+    console.log(decoded)
     return decoded.role
   } catch (error) {
     return false;

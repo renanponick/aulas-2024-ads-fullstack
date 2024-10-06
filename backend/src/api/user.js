@@ -55,7 +55,6 @@ class UserApi {
 
     async login(req, res) {
         const { email, senha } = req.body
-        console.log(req.body)
         try {
             const token = await UserController.login(email, senha)
 

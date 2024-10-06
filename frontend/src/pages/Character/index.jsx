@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './styles.css'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { createCharacter, deleteCharacter } from '../../api/character';
+import { createCharacter, updateCharacter, deleteCharacter } from '../../api/character';
 
 const icon = "https://freesvg.org/img/abstract-user-flat-1.png"
 
@@ -26,18 +26,30 @@ export default function Character() {
 
   const handleAddSave = async () => {
     try{
-      const apiResponse = await createCharacter(personagem)
+      if(isUpdate) {
+        const apiResponse = await updateCharacter(personagem.id ,personagem)
 
-      if(apiResponse.ok){
-        navigate('/api')
+        if(apiResponse.id){
+          navigate('/api')
+          return
+        }
+      } else {
+        const apiResponse = await createCharacter(personagem)
+  
+        if(apiResponse.id){
+          navigate('/api')
+          return
+        }
       }
     } catch (error) {
       if (error.status === 403) {
-        return toast("Sem permissão.");
+        toast("Sem permissão.");
       }
       if (error.status === 401 || error.status === 404) {
-        return toast('Email ou senha inválido, tente novamente!');
+        toast('Email ou senha inválido, tente novamente!');
       }
+      navigate('/api')
+      return
     }
   }
 
@@ -47,7 +59,7 @@ export default function Character() {
       if(response === personagem.name) {
         const apiResponse = await deleteCharacter(personagem.id)
 
-        if(apiResponse.ok){
+        if(apiResponse.status === 204){
           navigate('/api')
         }
       } else {

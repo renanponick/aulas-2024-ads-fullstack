@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from './routes/PrivateRoute';
 
+// 6 - Adicionar AuthProvider e PrivateRoute
 function App() {
   return (
     <AuthProvider>
@@ -20,7 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route element={<PrivateRoute />}>
             <Route path="/api" element={<RickAndMortyApi />} />
-            <Route path="/character" element={<Character />} /> {/* ajustar essa rota*/}
+            <Route path="/character" element={<Character />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/login" element={<Login />} />

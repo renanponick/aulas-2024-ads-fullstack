@@ -2,9 +2,11 @@ import { useContext, useEffect, useState } from 'react'
 import './styles.css'
 import { AuthContext } from '../../auth/Context'
 import { useNavigate } from 'react-router-dom';
+import { deleteUser, getContext, updateUser } from '../../api/user';
+import { toast } from 'react-toastify';
 
 export default function Profile() {
-  const { token, logout } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
   const [id, setId] = useState('');
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
@@ -14,46 +16,30 @@ export default function Profile() {
   const navigate = useNavigate();
 
   async function carregarPerfil() {
-    var requestOptions = {
-      headers: {
-        authorization: token
-      },
-      method: 'GET',
-      redirect: 'follow',
-    };
+    try {
+      const response = await getContext()
     
-    const response = await fetch(
-      `http://localhost:3000/api/v1/user/context`,
-      requestOptions
-    )
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-  
-    if(data.id) {
-      setId(data.id)
-      setNome(data.nome)
-      setEmail(data.email)
+      if(response.id) {
+        setId(response.id)
+        setNome(response.nome)
+        setEmail(response.email)
+      }
+    } catch (error) {
+      toast('Erro inesperado, tente novamente mais tarde!')
     }
   }
 
   const handleSaveUpdate = async () => {
-    const body = JSON.stringify({ nome: updNome, email: updEmail })
-    const headers = { 'Content-Type': 'application/json', 'Authorization': token }
-    const method = 'PUT'
+    try {
+      const response = await updateUser(id, { nome: updNome, email: updEmail })
   
-    const apiResponse = await fetch(
-      `http://localhost:3000/api/v1/user/${id}`,
-      { method, headers, body }
-    )
-
-    if(apiResponse.ok){
-      setNome(updNome)
-      setEmail(updEmail)
-      setIsUpdate(false)
+      if(response.id){
+        setNome(updNome)
+        setEmail(updEmail)
+        setIsUpdate(false)
+      }
+    } catch (error) {
+      toast('Erro inesperado, tente novamente mais tarde!')
     }
   }
 
@@ -64,23 +50,20 @@ export default function Profile() {
   }
 
   const handleClickDelete = async () => {
-    const response = prompt("Para confirmar exclusão digite seu email:")
+    try {
+      const response = prompt("Para confirmar exclusão digite seu email:")
 
-    if(response === email) {
-      const headers = { 'Content-Type': 'application/json', 'Authorization': token }
-      const method = 'DELETE'
-    
-      const apiResponse = await fetch(
-        `http://localhost:3000/api/v1/user/${id}`,
-        { method, headers }
-      )
-
-      if(apiResponse.ok){
-        logout()
-        navigate('/')
+      if(response === email) {      
+        const apiResponse = await deleteUser(id)
+        if(apiResponse.status === 204){
+          logout()
+          navigate('/')
+        }
+      } else {
+        toast("Nome Inválido, processo cancelado.")
       }
-    } else {
-      alert("Nome Inválido, processo cancelado.")
+    } catch (error) {
+      toast('Erro inesperado, tente novamente mais tarde!')
     }
   }
 

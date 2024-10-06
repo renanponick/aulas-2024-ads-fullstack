@@ -10,22 +10,26 @@ function authMiddleware(roles = []) {
     }
 
     jwt.verify(token, "exemplo", async (err, decoded) => {
-      if (err) {
-        return res.status(401).json({ mensagem: "Token inválido" });
-      }
+      try {
+        if (err) {
+          return res.status(401).json({ mensagem: "Token inválido" });
+        }
 
-      const userLogged = await user.findUser(decoded.id)
+        const userLogged = await user.findUser(decoded.id)
 
-      if(!userLogged) {
+        if(!userLogged) {
+          return res.status(404).json({ mensagem: "Usuário não encontrado" });
+        }
+        if(roles.length && !roles.includes(userLogged.permissao)){
+          return res.status(403).json({ mensagem: "Sem permissão" });
+        }
+
+        req.session = decoded;
+
+        next();
+      } catch (e) {
         return res.status(404).json({ mensagem: "Usuário não encontrado" });
       }
-      if(roles.length && !roles.includes(userLogged.permissao)){
-        return res.status(403).json({ mensagem: "Sem permissão" });
-      }
-
-      req.session = decoded;
-
-      next();
     });
   }
 }

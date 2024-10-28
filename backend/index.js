@@ -1,11 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-const database = require("./config/database");
+const database = require("./src/config/database");
 
-const UserApi = require("./api/user");
-const UserRouter = require("./routes/user");
-const CharacterRouter = require("./routes/character");
-const authMiddleware = require("./middleware/authMiddleware");
+const UserApi = require("./src/api/user");
+const UserRouter = require("./src/routes/user");
+const CharacterRouter = require("./src/routes/character");
+const authMiddleware = require("./src/middleware/authMiddleware");
 
 const app = express();
 app.use(express.json());

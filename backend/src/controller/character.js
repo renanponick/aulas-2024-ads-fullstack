@@ -58,7 +58,7 @@ class CharactersController {
         
             const data = await response.json();
 
-            if(!data?.info?.next){
+            if(!data?.info?.next || page === 3){
               hasMore = false
             }
             console.log(data)
